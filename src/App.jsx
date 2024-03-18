@@ -5,10 +5,14 @@ function App() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [displayInfo, setDisplayInfo] = useState("");
+    const [isSubmit, setIsSubmit] = useState(false);
 
     const handleForm = (e) => {
         e.preventDefault();
         console.log({ name: name, email: email, password: password });
+        setIsSubmit(true);
+        setDisplayInfo({ name: name, email: email, password: password });
     };
 
     return (
@@ -43,6 +47,27 @@ function App() {
                                 Submit
                             </button>
                         </form>
+                        {isSubmit && (
+                            <div className="fixed top-0 h-full w-full flex justify-center items-center bg-purple-600">
+                                <div className="w-1/2 h-1/2 bg-slate-600">
+                                    <div className="flex justify-center items-center flex-col gap-3">
+                                        <p className="text-[#fff] font-bold text-4xl">
+                                           Form Submit Successfully
+                                        </p>
+                                        <p>Name : {displayInfo.name}</p>
+                                        <p>Email: {displayInfo.email}</p>
+                                    </div>
+                                    <div>
+                                        <button
+                                            onClick={() => setIsSubmit(false)}
+                                            className="bg-slate-200 px-3 py-2 "
+                                        >
+                                            Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
